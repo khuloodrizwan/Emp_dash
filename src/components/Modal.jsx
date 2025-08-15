@@ -83,7 +83,7 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
       const employeeData = {
         ...formData,
         id: employee ? employee.id : Date.now(), // Generate ID for new employees
-        salary: formData.salary.startsWith(') ? formData.salary : `${formData.salary}`
+        salary: formData.salary.startsWith('$') ? formData.salary : `$${formData.salary}`
       };
       
       onSave(employeeData);
