@@ -36,7 +36,7 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
         department: '',
         salary: '',
         joinDate: '',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+        avatar: 'https://images.unsplash.com/photo-1494790108755-2616c64c6d0c?w=150&h=150&fit=crop&crop=face'
       });
     }
     setErrors({});
@@ -83,7 +83,7 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
       const employeeData = {
         ...formData,
         id: employee ? employee.id : Date.now(), // Generate ID for new employees
-        salary: formData.salary.startsWith('$') ? formData.salary : `$${formData.salary}`
+        salary: formData.salary.startsWith('₹') ? formData.salary : `₹${formData.salary}`
       };
       
       onSave(employeeData);
@@ -132,7 +132,7 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
           {/* Avatar Preview */}
           <div className="flex items-center justify-center mb-6">
             <img
-              src={formData.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'}
+              src={formData.avatar || 'https://images.unsplash.com/photo-1494790108755-2616c64c6d0c?w=150&h=150&fit=crop&crop=face'}
               alt="Employee Avatar"
               className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
             />
@@ -242,7 +242,7 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                 errors.salary ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="e.g., 75000 or $75,000"
+              placeholder="e.g., 75000 or ₹75,000"
             />
             {errors.salary && <p className="text-red-500 text-xs mt-1">{errors.salary}</p>}
           </div>
@@ -277,7 +277,7 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               value={formData.avatar}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              placeholder="https://example.com/avatar.jpg"
+              placeholder="Enter Image url"
             />
           </div>
 

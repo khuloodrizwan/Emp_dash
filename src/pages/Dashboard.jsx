@@ -86,11 +86,19 @@ const Dashboard = () => {
              joinDate.getFullYear() === now.getFullYear();
     }).length;
     const avgSalary = Math.round(
-      employees.reduce((sum, emp) => {
-        const salary = parseInt(emp.salary.replace(/[$,]/g, ''));
-        return sum + salary;
-      }, 0) / totalEmployees
-    );
+    employees.reduce((sum, emp) => {
+      let salaryNum = 0;
+
+      if (typeof emp.salary === "number") {
+        salaryNum = emp.salary; // already a number
+      } else if (typeof emp.salary === "string") {
+        // remove $ , ₹ or commas
+        salaryNum = parseFloat(emp.salary.replace(/[^0-9.-]+/g, ""));
+      }
+
+      return sum + salaryNum;
+    }, 0) / (totalEmployees || 1) // avoid divide-by-zero
+  );
 
     return { totalEmployees, departmentCount, newThisMonth, avgSalary };
   }, [employees]);
@@ -144,7 +152,10 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Avg. Salary</p>
-              <p className="text-3xl font-bold text-gray-900">${stats.avgSalary.toLocaleString()}</p>
+              <p className="text-3xl font-bold text-gray-900">
+  {stats.avgSalary.toLocaleString("en-IN", {style: "currency",currency: "INR" })}
+
+</p>
             </div>
             <div className="p-3 bg-purple-100 rounded-full">
               <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
