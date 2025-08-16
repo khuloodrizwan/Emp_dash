@@ -83,19 +83,17 @@ Collapsible left navigation with active states, badges, and a small “Quick Sta
 
 Dashboard.jsx
 
-Orchestrates app state. Key responsibilities:
+a. Holds employees, searchTerm, selectedDepartment, viewMode, and modal state.
 
-a.Holds employees, searchTerm, selectedDepartment, viewMode, and modal state.
+b. Computes filteredEmployees with useMemo (search across name/position/department/email + department filter).
 
-b.Computes filteredEmployees with useMemo (search across name/position/department/email + department filter).
+c. Derives departments from data for the filter dropdown.
 
-c.Derives departments from data for the filter dropdown.
+d. Calculates stats (totals, departments, new-this-month, average salary w/ currency parsing).
 
-d.Calculates stats (totals, departments, new-this-month, average salary w/ currency parsing).
+e. Renders cards or table based on viewMode.
 
-e.Renders cards or table based on viewMode.
-
-f.Uses the Modal to handle the unified employee form flow.
+f. Uses the Modal to handle the unified employee form flow.
 
 <b>Components</b>
 
@@ -128,8 +126,13 @@ Helpers: getDepartments(), getPositions() for dynamic lists.
 <h1>Screenshots</h1>
 
 🔹 Dashboard View
+
 <img src=".\src\assets\desktopcard.png" alt="Dashboard Screenshot" width="700" />
-<img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095643.png" alt="Dashboard Screenshot" width="700" />
+
+<img src=".\src\assets\desktoptable.png" alt="Dashboard Screenshot" width="700" />
+
+
 🔹 Mobile View
-<img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095714.png" alt="Mobile Screenshot" width="300" />
+
+<img src=".\src\assets\mobileview.png" alt="Mobile Screenshot" width="700" />
 
