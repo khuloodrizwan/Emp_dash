@@ -4,27 +4,28 @@ A clean, responsive Employee Dashboard built with React and Tailwind CSS. It sho
 
 <h1> 🧰 Technologies </h1>
 
-React (Vite)
+1. React (Vite)
 
-Tailwind CSS v4 (single import via @import "tailwindcss")
+2. Tailwind CSS v4 (single import via @import "tailwindcss")
 
-JavaScript (ES202x) with React Hooks (useState, useMemo, useCallback)
+3. JavaScript (ES202x) with React Hooks (useState, useMemo, useCallback)
 
-Utility-first, componentized architecture
+4. Utility-first, componentized architecture
 
-✨ Highlights
+<h1>✨ Highlights </h1>
 
-Unified employee management flow via a modal (create/update/remove in one place)
+1. Unified employee management flow via a modal (create/update/remove in one place)
 
-Two views: Card grid and data table
+2. Two views: Card grid and data table
 
-Fast search & filtering: Text search + department filter
+3. Fast search & filtering: Text search + department filter
 
-Quick stats: Totals, departments, new this month, and average salary
+4. Quick stats: Totals, departments, new this month, and average salary
 
-Responsive layout: Sticky Navbar & Sidebar for desktop/tablet/mobile
+5. Responsive layout: Sticky Navbar & Sidebar for desktop/tablet/mobile
 
-📦 Project Structure
+<h1>📦 Project Structure </h1>
+
 employee-dashboard/
 │
 ├─ 📂 src/
@@ -51,42 +52,24 @@ employee-dashboard/
 ├─ vite.config.js
 └─ README.md
 
+<h1>⚙️ Setup & Installation </h1>
 
-If present, your Vite entry (main.jsx) mounts <App /> into the DOM.
-
-⚙️ Setup & Installation
-
-Clone
+<b>Clone</b>
 
 git clone https://github.com/your-username/employee-dashboard.git
 cd employee-dashboard
 
-
-Install
+<b>Install</b>
 
 npm install
 
-
-Run (dev)
+<b>Run (dev)</b>
 
 npm run dev
 
+<b> Open the printed local URL (typically http://localhost:5173/). </b>
 
-Open the printed local URL (typically http://localhost:5173/).
-
-Build (prod)
-
-npm run build
-
-
-Preview (prod)
-
-npm run preview
-
-
-Requirements: Node 18+ recommended.
-
-▶️ How to Run
+<h1>▶️ How to Run</h1>
 
 Start dev server with npm run dev.
 
@@ -94,8 +77,9 @@ The app loads initial data from src/data.js.
 
 Use the controls at the top of the dashboard to search, filter by department, toggle view (cards/table), and manage records through the modal.
 
-🧠 Code Overview (What Lives Where)
-Layouts
+<h1>🧠 Code Overview (What Lives Where) </h1>
+
+<b>Layouts</b>
 
 Navbar.jsx
 Top bar with title, search (desktop), notifications popover, and profile menu. Sticky, with tasteful borders/shadows.
@@ -103,9 +87,10 @@ Top bar with title, search (desktop), notifications popover, and profile menu. S
 Sidebar.jsx
 Collapsible left navigation with active states, badges, and a small “Quick Stats” card. Sticky for persistent navigation.
 
-Page
+<b>Pages</b>
 
 Dashboard.jsx
+
 Orchestrates app state. Key responsibilities:
 
 Holds employees, searchTerm, selectedDepartment, viewMode, and modal state.
@@ -120,7 +105,7 @@ Renders cards or table based on viewMode.
 
 Uses the Modal to handle the unified employee form flow.
 
-Components
+<b>Components</b>
 
 EmployeeCard.jsx / EmployeeTable.jsx
 Two presentation modes sharing the same data model. Each surfaces actions that trigger the modal or removal as part of the unified flow.
@@ -134,7 +119,7 @@ Consistent, accessible buttons with icon support and Tailwind variants.
 Modal.jsx
 Reusable, accessible dialog that hosts the employee form; accepts existing data for updating or empty state for creating.
 
-Styles
+<b>Styles</b>
 
 index.css
 Tailwind v4 @layer base/components/utilities setup, global resets, focus styles, utility classes, and animations.
@@ -142,8 +127,17 @@ Tailwind v4 @layer base/components/utilities setup, global resets, focus styles,
 App.css
 Additional polish: scrollbar styling, subtle transitions/animations, hover effects, and helpers (e.g., skeletons).
 
-Data
+<b>Data</b>
 
 data.js
 Seed employees (20 sample records) with id, name, email, position, department, salary, joinDate, avatar.
 Helpers: getDepartments(), getPositions() for dynamic lists.
+
+<h1>Screenshots</h1>
+
+🔹 Dashboard View
+<img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095550.png" alt="Dashboard Screenshot" width="700" />
+<img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095643.png" alt="Dashboard Screenshot" width="700" />
+🔹 Mobile View
+<img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095714.png" alt="Mobile Screenshot" width="300" />
+
