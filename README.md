@@ -29,24 +29,24 @@ A clean, responsive Employee Dashboard built with React and Tailwind CSS. It sho
 employee-dashboard/
 │
 ├─ 📂 src/
-│  ├─ 📂 components/               # Reusable UI components
-│  │  ├─ Button.jsx                # Reusable button with variants
-│  │  ├─ EmployeeCard.jsx          # Card view for an employee
-│  │  ├─ EmployeeTable.jsx         # Table view for employees
-│  │  ├─ Modal.jsx                 # Form modal used by Dashboard
-│  │  └─ SearchBar.jsx             # Search input with debounce-friendly API
-│  │
-│  ├─ 📂 layouts/                  # App chrome (navigation)
-│  │  ├─ Navbar.jsx                # Top navigation (profile, notifications)
-│  │  └─ Sidebar.jsx               # Collapsible sidebar navigation + stats
-│  │
-│  ├─ 📂 pages/
-│  │  └─ Dashboard.jsx             # Main page: state, filters, stats, views
-│  │
-│  ├─ App.jsx                      # App shell (composes layouts + pages)
-│  ├─ data.js                      # Dummy employee dataset + helpers
-│  ├─ index.css                    # Tailwind v4 import + global layers/utilities
-│  └─ App.css                      # Extra custom styles (scrollbars, animations)
+│ ├─ 📂 components/ # Reusable UI components
+│ │ ├─ Button.jsx # Reusable button with variants
+│ │ ├─ EmployeeCard.jsx # Card view for an employee
+│ │ ├─ EmployeeTable.jsx # Table view for employees
+│ │ ├─ Modal.jsx # Form modal used by Dashboard
+│ │ └─ SearchBar.jsx # Search input with debounce-friendly API
+│ │
+│ ├─ 📂 layouts/ # App chrome (navigation)
+│ │ ├─ Navbar.jsx # Top navigation (profile, notifications)
+│ │ └─ Sidebar.jsx # Collapsible sidebar navigation + stats
+│ │
+│ ├─ 📂 pages/
+│ │ └─ Dashboard.jsx # Main page: state, filters, stats, views
+│ │
+│ ├─ App.jsx # App shell (composes layouts + pages)
+│ ├─ data.js # Dummy employee dataset + helpers
+│ ├─ index.css # Tailwind v4 import + global layers/utilities
+│ └─ App.css # Extra custom styles (scrollbars, animations)
 │
 ├─ package.json
 ├─ vite.config.js
