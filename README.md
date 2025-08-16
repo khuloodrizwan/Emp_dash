@@ -26,31 +26,27 @@ A clean, responsive Employee Dashboard built with React and Tailwind CSS. It sho
 
 <h1>📦 Project Structure </h1>
 
-employee-dashboard/
-│
-├─ 📂 src/
-│ ├─ 📂 components/ # Reusable UI components
-│ │ ├─ Button.jsx # Reusable button with variants
-│ │ ├─ EmployeeCard.jsx # Card view for an employee
-│ │ ├─ EmployeeTable.jsx # Table view for employees
-│ │ ├─ Modal.jsx # Form modal used by Dashboard
-│ │ └─ SearchBar.jsx # Search input with debounce-friendly API
-│ │
-│ ├─ 📂 layouts/ # App chrome (navigation)
-│ │ ├─ Navbar.jsx # Top navigation (profile, notifications)
-│ │ └─ Sidebar.jsx # Collapsible sidebar navigation + stats
-│ │
-│ ├─ 📂 pages/
-│ │ └─ Dashboard.jsx # Main page: state, filters, stats, views
-│ │
-│ ├─ App.jsx # App shell (composes layouts + pages)
-│ ├─ data.js # Dummy employee dataset + helpers
-│ ├─ index.css # Tailwind v4 import + global layers/utilities
-│ └─ App.css # Extra custom styles (scrollbars, animations)
-│
-├─ package.json
-├─ vite.config.js
-└─ README.md
+- employee-dashboard/
+  - 📂src/
+    - 📂components/    #Reusable UI components
+      - Button.jsx
+      - EmployeeCard.jsx
+      - EmployeeTable.jsx
+      - Modal.jsx
+      - SearchBar.jsx
+    - 📂layouts/
+      - Navbar.jsx
+      - Sidebar.jsx
+    - 📂pages/
+      - Dashboard.jsx
+    - App.jsx
+    - data.js
+    - index.css
+    - App.css
+  - package.json
+  - vite.config.js
+  - README.md
+
 
 <h1>⚙️ Setup & Installation </h1>
 
