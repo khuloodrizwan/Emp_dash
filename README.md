@@ -54,37 +54,29 @@ employee-dashboard/
 
 <h1>⚙️ Setup & Installation </h1>
 
-<b>Clone</b>
+<b>1. Clone</b>
 
-git clone https://github.com/your-username/employee-dashboard.git
-cd employee-dashboard
+git clone https://github.com/khuloodrizwan/Emp_dash.git
+cd Emp_dash
 
-<b>Install</b>
+<b>2. Install</b>
 
 npm install
 
-<b>Run (dev)</b>
+<b>3. Run (dev)</b>
 
 npm run dev
 
-<b> Open the printed local URL (typically http://localhost:5173/). </b>
-
-<h1>▶️ How to Run</h1>
-
-Start dev server with npm run dev.
-
-The app loads initial data from src/data.js.
-
-Use the controls at the top of the dashboard to search, filter by department, toggle view (cards/table), and manage records through the modal.
+<b>4. Open the printed local URL (typically http://localhost:5173/). </b>
 
 <h1>🧠 Code Overview (What Lives Where) </h1>
 
 <b>Layouts</b>
 
-Navbar.jsx
+1. Navbar.jsx
 Top bar with title, search (desktop), notifications popover, and profile menu. Sticky, with tasteful borders/shadows.
 
-Sidebar.jsx
+2. Sidebar.jsx
 Collapsible left navigation with active states, badges, and a small “Quick Stats” card. Sticky for persistent navigation.
 
 <b>Pages</b>
@@ -93,38 +85,38 @@ Dashboard.jsx
 
 Orchestrates app state. Key responsibilities:
 
-Holds employees, searchTerm, selectedDepartment, viewMode, and modal state.
+a.Holds employees, searchTerm, selectedDepartment, viewMode, and modal state.
 
-Computes filteredEmployees with useMemo (search across name/position/department/email + department filter).
+b.Computes filteredEmployees with useMemo (search across name/position/department/email + department filter).
 
-Derives departments from data for the filter dropdown.
+c.Derives departments from data for the filter dropdown.
 
-Calculates stats (totals, departments, new-this-month, average salary w/ currency parsing).
+d.Calculates stats (totals, departments, new-this-month, average salary w/ currency parsing).
 
-Renders cards or table based on viewMode.
+e.Renders cards or table based on viewMode.
 
-Uses the Modal to handle the unified employee form flow.
+f.Uses the Modal to handle the unified employee form flow.
 
 <b>Components</b>
 
-EmployeeCard.jsx / EmployeeTable.jsx
+1. EmployeeCard.jsx / EmployeeTable.jsx
 Two presentation modes sharing the same data model. Each surfaces actions that trigger the modal or removal as part of the unified flow.
 
-SearchBar.jsx
+2. SearchBar.jsx
 Controlled input that feeds searchTerm up to the Dashboard.
 
-Button.jsx
+3. Button.jsx
 Consistent, accessible buttons with icon support and Tailwind variants.
 
-Modal.jsx
+4. Modal.jsx
 Reusable, accessible dialog that hosts the employee form; accepts existing data for updating or empty state for creating.
 
 <b>Styles</b>
 
-index.css
+1. index.css
 Tailwind v4 @layer base/components/utilities setup, global resets, focus styles, utility classes, and animations.
 
-App.css
+2. App.css
 Additional polish: scrollbar styling, subtle transitions/animations, hover effects, and helpers (e.g., skeletons).
 
 <b>Data</b>
@@ -136,7 +128,7 @@ Helpers: getDepartments(), getPositions() for dynamic lists.
 <h1>Screenshots</h1>
 
 🔹 Dashboard View
-<img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095550.png" alt="Dashboard Screenshot" width="700" />
+<img src=".\src\assets\desktopcard.png" alt="Dashboard Screenshot" width="700" />
 <img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095643.png" alt="Dashboard Screenshot" width="700" />
 🔹 Mobile View
 <img src="C:\Users\chivi\OneDrive\Desktop\dashboard\Emp_dash\src\assets\Screenshot 2025-08-16 095714.png" alt="Mobile Screenshot" width="300" />
