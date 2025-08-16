@@ -8,7 +8,7 @@ A clean, responsive Employee Dashboard built with React and Tailwind CSS. It sho
 
 2. Tailwind CSS v4 (single import via @import "tailwindcss")
 
-3. JavaScript (ES202x) with React Hooks (useState, useMemo, useCallback)
+3. JavaScript with React Hooks (useState, useMemo, useCallback)
 
 4. Utility-first, componentized architecture
 
@@ -28,7 +28,7 @@ A clean, responsive Employee Dashboard built with React and Tailwind CSS. It sho
 
 - employee-dashboard/
   - 📂src/
-    - 📂components/    #Reusable UI components
+    - 📂components/     
       - Button.jsx
       - EmployeeCard.jsx
       - EmployeeTable.jsx
