@@ -1,5 +1,4 @@
-// Search Bar Component - filters employees by name, position, or department
-// Features real-time search with debouncing and clear functionality
+// Search Bar Component with dark mode support
 import React, { useState, useEffect } from 'react';
 
 const SearchBar = ({ onSearch, placeholder = "Search employees..." }) => {
@@ -36,7 +35,7 @@ const SearchBar = ({ onSearch, placeholder = "Search employees..." }) => {
       {/* Search Icon */}
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg
-          className="h-5 w-5 text-gray-400"
+          className="h-5 w-5 text-gray-400 dark:text-gray-500"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -56,14 +55,14 @@ const SearchBar = ({ onSearch, placeholder = "Search employees..." }) => {
         value={searchTerm}
         onChange={handleInputChange}
         placeholder={placeholder}
-        className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
+        className="w-full pl-10 pr-10 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
       />
 
       {/* Clear Button */}
       {searchTerm && (
         <button
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -79,7 +78,7 @@ const SearchBar = ({ onSearch, placeholder = "Search employees..." }) => {
       {/* Search Results Counter (optional) */}
       {debouncedSearchTerm && (
         <div className="absolute top-full left-0 right-0 mt-1">
-          <div className="text-xs text-gray-500 px-3">
+          <div className="text-xs text-gray-500 dark:text-gray-400 px-3">
             Searching for "{debouncedSearchTerm}"
           </div>
         </div>

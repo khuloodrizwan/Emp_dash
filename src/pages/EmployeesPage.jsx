@@ -1,15 +1,14 @@
-// Main Dashboard Page - overview with clickable navigation cards and dark mode
+// Employees Page - dedicated page for employee management
 import React, { useState, useCallback, useMemo } from 'react';
 import { employees as initialEmployees } from '../data.js';
-import { useNavigation } from '../contexts/NavigationContext';
 import EmployeeCard from '../components/EmployeeCard';
 import EmployeeTable from '../components/EmployeeTable';
 import SearchBar from '../components/SearchBar';
 import Button from '../components/Button';
 import Modal from '../components/Modal';
-import StatsCard from '../components/StatsCard';
+import { useNavigation } from '../contexts/NavigationContext';
 
-const Dashboard = () => {
+const EmployeesPage = () => {
   const { navigateTo } = useNavigation();
   const [employees, setEmployees] = useState(initialEmployees);
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,9 +22,10 @@ const Dashboard = () => {
     return employees.filter(employee => {
       const matchesSearch = searchTerm === '' || 
         employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.position.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.position?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.role?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.email.toLowerCase().includes(searchTerm.toLowerCase());
+        employee.email?.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesDepartment = selectedDepartment === 'all' || 
         employee.department === selectedDepartment;
@@ -69,120 +69,40 @@ const Dashboard = () => {
     }
   };
 
-  // Calculate statistics
-  const stats = useMemo(() => {
-    const totalEmployees = employees.length;
-    const departmentCount = new Set(employees.map(emp => emp.department)).size;
-    const newThisMonth = employees.filter(emp => {
-      const joinDate = new Date(emp.joinDate);
-      const now = new Date();
-      return joinDate.getMonth() === now.getMonth() && 
-             joinDate.getFullYear() === now.getFullYear();
-    }).length;
-    
-    const avgSalary = Math.round(
-      employees.reduce((sum, emp) => {
-        let salaryNum = 0;
-        if (typeof emp.salary === "number") {
-          salaryNum = emp.salary;
-        } else if (typeof emp.salary === "string") {
-          salaryNum = parseFloat(emp.salary.replace(/[^0-9.-]+/g, ""));
-        }
-        return sum + salaryNum;
-      }, 0) / (totalEmployees || 1)
-    );
-
-    return { totalEmployees, departmentCount, newThisMonth, avgSalary };
-  }, [employees]);
-
-  // Stats card data with navigation
-  const statsCards = [
-    {
-      title: "Total Employees",
-      value: stats.totalEmployees,
-      subtitle: {
-        highlight: `+${stats.newThisMonth}`,
-        text: "this month"
-      },
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      ),
-      iconBgColor: "bg-blue-100",
-      iconTextColor: "text-blue-600",
-      onClick: () => navigateTo('employees')
-    },
-    {
-      title: "Departments",
-      value: stats.departmentCount,
-      subtitle: {
-        text: "Across organization"
-      },
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-        </svg>
-      ),
-      iconBgColor: "bg-green-100",
-      iconTextColor: "text-green-600",
-      onClick: () => navigateTo('departments')
-    },
-    {
-      title: "Avg. Salary",
-      value: stats.avgSalary.toLocaleString("en-IN", {style: "currency", currency: "INR"}),
-      subtitle: {
-        text: "Per employee"
-      },
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      iconBgColor: "bg-purple-100",
-      iconTextColor: "text-purple-600",
-      onClick: () => navigateTo('payroll')
-    },
-    {
-      title: "Active Projects",
-      value: "12",
-      subtitle: {
-        highlight: "3",
-        text: "due this week"
-      },
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      ),
-      iconBgColor: "bg-orange-100",
-      iconTextColor: "text-orange-600",
-      onClick: () => navigateTo('analytics')
-    }
-  ];
-
   return (
     <div className="p-6 bg-gray-50 dark:bg-gray-900 min-h-screen">
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Employee Dashboard</h1>
-        <p className="text-gray-600 dark:text-gray-400">Manage and monitor your workforce efficiently</p>
-      </div>
+        {/* Breadcrumb */}
+        <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <button 
+            onClick={() => navigateTo('dashboard')}
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          >
+            Dashboard
+          </button>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          <span className="text-gray-900 dark:text-white font-medium">Employees</span>
+        </nav>
 
-      {/* Statistics Cards - Now Clickable for Navigation */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {statsCards.map((card, index) => (
-          <StatsCard
-            key={index}
-            title={card.title}
-            value={card.value}
-            subtitle={card.subtitle}
-            icon={card.icon}
-            iconBgColor={card.iconBgColor}
-            iconTextColor={card.iconTextColor}
-            onClick={card.onClick}
-          />
-        ))}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">All Employees</h1>
+            <p className="text-gray-600 dark:text-gray-400">Manage and monitor your workforce</p>
+          </div>
+          <Button
+            onClick={handleAddEmployee}
+            variant="primary"
+            className="whitespace-nowrap"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            Add Employee
+          </Button>
+        </div>
       </div>
 
       {/* Controls Section */}
@@ -207,49 +127,34 @@ const Dashboard = () => {
             </select>
           </div>
 
-          {/* Right side - View Toggle and Add Button */}
-          <div className="flex gap-3">
-            {/* View Mode Toggle */}
-            <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode('cards')}
-                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                  viewMode === 'cards'
-                    ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 00-2 2v2a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2" />
-                </svg>
-                Cards
-              </button>
-              <button
-                onClick={() => setViewMode('table')}
-                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                  viewMode === 'table'
-                    ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-                Table
-              </button>
-            </div>
-
-            {/* Add Employee Button */}
-            <Button
-              onClick={handleAddEmployee}
-              variant="primary"
-              className="whitespace-nowrap"
+          {/* View Mode Toggle */}
+          <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+            <button
+              onClick={() => setViewMode('cards')}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'cards'
+                  ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+              }`}
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 00-2 2v2a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2" />
               </svg>
-              Add Employee
-            </Button>
+              Cards
+            </button>
+            <button
+              onClick={() => setViewMode('table')}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'table'
+                  ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+              }`}
+            >
+              <svg className="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              Table
+            </button>
           </div>
         </div>
 
@@ -338,4 +243,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default EmployeesPage;
