@@ -1,4 +1,4 @@
-/* index.css - Global styles with dark mode support using Tailwind CSS v4 */
+/* index.css - Global styles with dark mode support and Tailwind CSS v4 imports */
 
 @import "tailwindcss";
 
@@ -6,11 +6,6 @@
 @layer base {
   * {
     box-sizing: border-box;
-  }
-
-  html {
-    /* Enable dark mode class strategy */
-    color-scheme: light dark;
   }
 
   html, body {
@@ -34,7 +29,7 @@
   /* Dark mode styles */
   .dark body {
     background-color: #0f172a;
-    color: #e2e8f0;
+    color: #f1f5f9;
   }
 
   #root {
@@ -42,7 +37,7 @@
     overflow: hidden;
   }
 
-  /* Improved focus styles for both light and dark modes */
+  /* Improved focus styles for both themes */
   button:focus,
   input:focus,
   select:focus,
@@ -55,7 +50,8 @@
   .dark input:focus,
   .dark select:focus,
   .dark textarea:focus {
-    outline-color: #60a5fa;
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
   }
 
   /* Better link styles */
@@ -76,38 +72,6 @@
 
   .dark a:hover {
     color: #93c5fd;
-  }
-
-  /* Custom scrollbar for both themes */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 3px;
-  }
-
-  .dark ::-webkit-scrollbar-track {
-    background: #1e293b;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-  }
-
-  .dark ::-webkit-scrollbar-thumb {
-    background: #475569;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-
-  .dark ::-webkit-scrollbar-thumb:hover {
-    background: #64748b;
   }
 }
 
@@ -145,7 +109,7 @@
   }
 
   .input-error {
-    @apply border-red-500 focus:ring-red-500 dark:border-red-400 dark:focus:ring-red-400;
+    @apply border-red-500 dark:border-red-400 focus:ring-red-500 dark:focus:ring-red-400;
   }
 
   /* Badge styles with dark mode */
@@ -154,23 +118,23 @@
   }
 
   .badge-blue {
-    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400;
+    @apply bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300;
   }
 
   .badge-green {
-    @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400;
+    @apply bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300;
   }
 
   .badge-yellow {
-    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400;
+    @apply bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300;
   }
 
   .badge-red {
-    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400;
+    @apply bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300;
   }
 
   .badge-gray {
-    @apply bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300;
+    @apply bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300;
   }
 
   /* Animation classes */
@@ -218,12 +182,12 @@
 
   /* Loading spinner with dark mode */
   .spinner {
-    @apply animate-spin rounded-full border-2 border-gray-200 dark:border-gray-600 border-t-blue-600 dark:border-t-blue-400;
+    @apply animate-spin rounded-full border-2 border-gray-200 dark:border-gray-700 border-t-blue-600 dark:border-t-blue-400;
   }
 
   /* Status indicators with dark mode */
   .status-online {
-    @apply inline-block w-2 h-2 bg-green-500 rounded-full;
+    @apply inline-block w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full;
   }
 
   .status-offline {
@@ -231,7 +195,7 @@
   }
 
   .status-away {
-    @apply inline-block w-2 h-2 bg-yellow-500 rounded-full;
+    @apply inline-block w-2 h-2 bg-yellow-500 dark:bg-yellow-400 rounded-full;
   }
 
   /* Divider with dark mode */
@@ -241,7 +205,7 @@
 
   /* Avatar styles */
   .avatar {
-    @apply rounded-full object-cover border-2 border-white dark:border-gray-800 shadow-sm;
+    @apply rounded-full object-cover border-2 border-white dark:border-gray-700 shadow-sm;
   }
 
   .avatar-sm {
@@ -273,6 +237,26 @@
     display: none;
   }
 
+  /* Custom scrollbar for dark mode */
+  .dark .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 3px;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 3px;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+
   /* Text selection */
   .select-none {
     -webkit-user-select: none;
@@ -281,7 +265,7 @@
     user-select: none;
   }
 
-  /* Glass effect with dark mode */
+  /* Glass effect for both themes */
   .glass {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -289,12 +273,19 @@
   }
 
   .dark .glass {
-    background-color: rgba(15, 23, 42, 0.8);
+    background-color: rgba(31, 41, 55, 0.8);
   }
 
   /* Gradient text */
   .gradient-text {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .gradient-text {
+    background: linear-gradient(135deg, #93c5fd 0%, #a78bfa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -310,7 +301,7 @@
     display: none;
   }
 
-  /* Custom shadows with dark mode */
+  /* Custom shadows for dark mode */
   .shadow-colored {
     box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
   }
@@ -343,11 +334,6 @@
 
   .safe-right {
     padding-right: env(safe-area-inset-right);
-  }
-
-  /* Theme transition utility */
-  .theme-transition {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 }
 
@@ -385,56 +371,11 @@
   }
 }
 
-/* Custom table hover effects with dark mode */
-.table-row-hover:hover {
-  @apply bg-gray-50 dark:bg-gray-700/50;
-  transform: scale(1.001);
-  transition: all 0.15s ease;
-}
-
-/* Modal backdrop blur effect */
-.modal-backdrop {
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
-  }
-  
-  .print-break {
-    page-break-after: always;
-  }
-  
-  /* Ensure good contrast in print */
-  .dark * {
-    background: white !important;
-    color: black !important;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .card {
-    @apply border-2 border-black dark:border-white;
-  }
-  
-  .btn {
-    @apply border-2 border-current;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* Theme transition for smooth dark/light mode switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
 
 /* Responsive breakpoints reference:

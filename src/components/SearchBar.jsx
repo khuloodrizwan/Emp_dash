@@ -1,90 +1,49 @@
-// Search Bar Component with dark mode support
-import React, { useState, useEffect } from 'react';
+// Reusable Button Component with dark mode support
+import React from 'react';
 
-const SearchBar = ({ onSearch, placeholder = "Search employees..." }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-
-  // Debounce search term to avoid excessive API calls or filtering
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearchTerm(searchTerm);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [searchTerm]);
-
-  // Call onSearch when debounced search term changes
-  useEffect(() => {
-    onSearch(debouncedSearchTerm);
-  }, [debouncedSearchTerm, onSearch]);
-
-  // Handle input change
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
+const Button = ({ 
+  children, 
+  onClick, 
+  variant = 'primary', 
+  size = 'md', 
+  disabled = false, 
+  className = '', 
+  ...props 
+}) => {
+  // Base button classes
+  const baseClasses = 'font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2';
+  
+  // Variant-specific styles with dark mode
+  const variants = {
+    primary: 'bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700',
+    secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900 focus:ring-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200',
+    danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 dark:bg-red-600 dark:hover:bg-red-700',
+    success: 'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500 dark:bg-green-600 dark:hover:bg-green-700',
+    outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500 dark:border-blue-500 dark:text-blue-400 dark:hover:bg-blue-900/20',
+    ghost: 'text-gray-600 hover:bg-gray-100 focus:ring-gray-500 dark:text-gray-400 dark:hover:bg-gray-700'
   };
-
-  // Clear search
-  const handleClear = () => {
-    setSearchTerm('');
-    setDebouncedSearchTerm('');
+  
+  // Size-specific styles
+  const sizes = {
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2 text-sm',
+    lg: 'px-6 py-3 text-base',
+    xl: 'px-8 py-4 text-lg'
   };
-
+  
+  // Combine all classes
+  const buttonClasses = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
+  
   return (
-    <div className="relative max-w-md w-full">
-      {/* Search Icon */}
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <svg
-          className="h-5 w-5 text-gray-400 dark:text-gray-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-      </div>
-
-      {/* Search Input */}
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        className="w-full pl-10 pr-10 py-2.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
-      />
-
-      {/* Clear Button */}
-      {searchTerm && (
-        <button
-          onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-        >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      )}
-
-      {/* Search Results Counter (optional) */}
-      {debouncedSearchTerm && (
-        <div className="absolute top-full left-0 right-0 mt-1">
-          <div className="text-xs text-gray-500 dark:text-gray-400 px-3">
-            Searching for "{debouncedSearchTerm}"
-          </div>
-        </div>
-      )}
-    </div>
+    <button
+      className={buttonClasses}
+      onClick={onClick}
+      disabled={disabled}
+      {...props}
+    >
+      {children}
+    </button>
   );
 };
 
-export default SearchBar;
+export default Button;

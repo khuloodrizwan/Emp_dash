@@ -1,5 +1,4 @@
-// Modal Component - reusable modal for adding/editing employees
-// Features overlay, close functionality, and form validation
+// Modal Component with dark mode support for adding/editing employees
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 
@@ -82,7 +81,7 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
     if (validateForm()) {
       const employeeData = {
         ...formData,
-        id: employee ? employee.id : Date.now(), // Generate ID for new employees
+        id: employee ? employee.id : Date.now(),
         salary: formData.salary.startsWith('₹') ? formData.salary : `₹${formData.salary}`
       };
       
@@ -110,16 +109,16 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 flex items-center justify-center p-4 z-50">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
             {title || (employee ? 'Edit Employee' : 'Add New Employee')}
           </h2>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -134,13 +133,13 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
             <img
               src={formData.avatar || 'https://images.unsplash.com/photo-1494790108755-2616c64c6d0c?w=150&h=150&fit=crop&crop=face'}
               alt="Employee Avatar"
-              className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+              className="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-gray-700 shadow-md"
             />
           </div>
 
           {/* Name Field */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Full Name *
             </label>
             <input
@@ -149,17 +148,17 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                errors.name ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 ${
+                errors.name ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
               placeholder="Enter full name"
             />
-            {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+            {errors.name && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.name}</p>}
           </div>
 
           {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Email Address *
             </label>
             <input
@@ -168,17 +167,17 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 ${
+                errors.email ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
               placeholder="Enter email address"
             />
-            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+            {errors.email && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.email}</p>}
           </div>
 
           {/* Position Field */}
           <div>
-            <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="position" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Position *
             </label>
             <input
@@ -187,17 +186,17 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               name="position"
               value={formData.position}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                errors.position ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 ${
+                errors.position ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
               placeholder="Enter job position"
             />
-            {errors.position && <p className="text-red-500 text-xs mt-1">{errors.position}</p>}
+            {errors.position && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.position}</p>}
           </div>
 
           {/* Department Field */}
           <div>
-            <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="department" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Department *
             </label>
             <select
@@ -205,8 +204,8 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               name="department"
               value={formData.department}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                errors.department ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-gray-700 dark:text-white ${
+                errors.department ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
             >
               <option value="">Select Department</option>
@@ -225,12 +224,12 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               <option value="Security">Security</option>
               <option value="Customer Support">Customer Support</option>
             </select>
-            {errors.department && <p className="text-red-500 text-xs mt-1">{errors.department}</p>}
+            {errors.department && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.department}</p>}
           </div>
 
           {/* Salary Field */}
           <div>
-            <label htmlFor="salary" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="salary" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Salary *
             </label>
             <input
@@ -239,17 +238,17 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               name="salary"
               value={formData.salary}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                errors.salary ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 ${
+                errors.salary ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
               placeholder="e.g., 75000 or ₹75,000"
             />
-            {errors.salary && <p className="text-red-500 text-xs mt-1">{errors.salary}</p>}
+            {errors.salary && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.salary}</p>}
           </div>
 
           {/* Join Date Field */}
           <div>
-            <label htmlFor="joinDate" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="joinDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Join Date *
             </label>
             <input
@@ -258,16 +257,16 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               name="joinDate"
               value={formData.joinDate}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                errors.joinDate ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors dark:bg-gray-700 dark:text-white ${
+                errors.joinDate ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
               }`}
             />
-            {errors.joinDate && <p className="text-red-500 text-xs mt-1">{errors.joinDate}</p>}
+            {errors.joinDate && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.joinDate}</p>}
           </div>
 
           {/* Avatar URL Field */}
           <div>
-            <label htmlFor="avatar" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="avatar" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Avatar URL (Optional)
             </label>
             <input
@@ -276,13 +275,13 @@ const Modal = ({ isOpen, onClose, onSave, employee = null, title }) => {
               name="avatar"
               value={formData.avatar}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
               placeholder="Enter Image url"
             />
           </div>
 
           {/* Modal Footer */}
-          <div className="flex space-x-3 pt-4 border-t border-gray-200">
+          <div className="flex space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
             <Button
               type="button"
               variant="secondary"

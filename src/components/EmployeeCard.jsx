@@ -1,24 +1,23 @@
-// Employee Card Component - displays individual employee information in card format
-// Includes avatar, basic info, and action buttons
+// Employee Card Component with dark mode support
 import React from 'react';
 import Button from './Button';
 
 const EmployeeCard = ({ employee, onEdit, onDelete }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100 dark:border-gray-700">
       {/* Card Header with Avatar */}
       <div className="p-6 pb-4">
         <div className="flex items-center space-x-4">
           <img
             src={employee.avatar}
             alt={employee.name}
-            className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-md"
+            className="w-16 h-16 rounded-full object-cover border-4 border-white dark:border-gray-700 shadow-md"
           />
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
               {employee.name}
             </h3>
-            <p className="text-sm text-gray-600">{employee.position}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{employee.position}</p>
           </div>
         </div>
       </div>
@@ -27,29 +26,29 @@ const EmployeeCard = ({ employee, onEdit, onDelete }) => {
       <div className="px-6 pb-4">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-500">Department:</span>
-            <span className="text-sm font-medium text-gray-900">
+            <span className="text-sm text-gray-500 dark:text-gray-400">Department:</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
               {employee.department}
             </span>
           </div>
           
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-500">Email:</span>
-            <span className="text-sm text-blue-600 truncate max-w-[150px]">
+            <span className="text-sm text-gray-500 dark:text-gray-400">Email:</span>
+            <span className="text-sm text-blue-600 dark:text-blue-400 truncate max-w-[150px]">
               {employee.email}
             </span>
           </div>
           
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-500">Salary:</span>
-            <span className="text-sm font-medium text-green-600">
+            <span className="text-sm text-gray-500 dark:text-gray-400">Salary:</span>
+            <span className="text-sm font-medium text-green-600 dark:text-green-400">
               {employee.salary}
             </span>
           </div>
           
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-500">Joined:</span>
-            <span className="text-sm text-gray-900">
+            <span className="text-sm text-gray-500 dark:text-gray-400">Joined:</span>
+            <span className="text-sm text-gray-900 dark:text-white">
               {new Date(employee.joinDate).toLocaleDateString()}
             </span>
           </div>
@@ -57,7 +56,7 @@ const EmployeeCard = ({ employee, onEdit, onDelete }) => {
       </div>
       
       {/* Card Footer with Action Buttons */}
-      <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
+      <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-100 dark:border-gray-600">
         <div className="flex space-x-2">
           <Button
             variant="outline"
